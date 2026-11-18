@@ -1,0 +1,909 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: #0f0f0f;
+  background-color: #f6f6f6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light dark;
+
+  --surface: #ffffff;
+  --border: rgba(0, 0, 0, 0.12);
+  --text-muted: #5b5b5b;
+  --accent: #396cd8;
+  --accent-hover: #2f5cba;
+  --accent-active: #284fa0;
+  --accent-soft: rgba(57, 108, 216, 0.16);
+  --danger: #c0392b;
+  --high: #b4232f;
+  --medium: #9a6300;
+  --low: #237a53;
+  --bg: #f6f6f6;
+  --surface-raised: #ffffff;
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
+  --focus-ring: rgba(57, 108, 216, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+}
+
+.container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 24px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.app-header h1 {
+  padding-right: 120px;
+}
+
+#settings-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.progress-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background-color: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.input,
+.btn {
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  padding: 0.55em 0.85em;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.input:focus-visible,
+.btn:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(57, 108, 216, 0.25);
+}
+
+.input::placeholder {
+  color: #8a8a8a;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: var(--surface);
+  white-space: nowrap;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.btn:active:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+  background-color: var(--accent-active);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: inherit;
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn-small {
+  padding: 0.35em 0.7em;
+  font-size: 0.85rem;
+}
+
+.add-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px 120px auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.88rem;
+  padding: 0.35em 0.8em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: inherit;
+}
+
+.filter-btn.active {
+  background-color: var(--surface);
+  color: inherit;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.filter-count {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.search-input {
+  flex: 1 1 200px;
+  max-width: 260px;
+  padding: 0.45em 0.8em;
+}
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background-color: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.task.editing {
+  border-color: var(--accent);
+}
+
+.task.completed {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.task-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.task-toggle {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex: 0 0 auto;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.task-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.task-title {
+  font-size: 0.97rem;
+  word-break: break-word;
+}
+
+.task.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.badge,
+.due,
+.notes-flag {
+  border-radius: 999px;
+  padding: 0.1em 0.6em;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.badge.priority-high {
+  color: var(--high);
+  border-color: rgba(180, 35, 47, 0.35);
+  background-color: rgba(180, 35, 47, 0.08);
+}
+
+.badge.priority-medium {
+  color: var(--medium);
+  border-color: rgba(154, 99, 0, 0.35);
+  background-color: rgba(154, 99, 0, 0.08);
+}
+
+.badge.priority-low {
+  color: var(--low);
+  border-color: rgba(35, 122, 83, 0.35);
+  background-color: rgba(35, 122, 83, 0.08);
+}
+
+.due {
+  border-color: var(--border);
+}
+
+.due.overdue {
+  color: var(--danger);
+  border-color: rgba(192, 57, 43, 0.4);
+  background-color: rgba(192, 57, 43, 0.08);
+  font-weight: 600;
+}
+
+.notes-flag {
+  border-color: var(--border);
+  color: var(--text-muted);
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-actions {
+  display: flex;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.task-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 14px 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.editor-row {
+  display: grid;
+  grid-template-columns: 170px 130px;
+  gap: 8px;
+}
+
+.editor-notes {
+  resize: vertical;
+  min-height: 60px;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.empty {
+  margin: 8px 0 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.storage-error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--danger);
+}
+
+@media (max-width: 620px) {
+  .container {
+    padding: 24px 16px 40px;
+  }
+
+  .add-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .add-row .title-input,
+  .add-row .btn-primary {
+    grid-column: 1 / -1;
+  }
+
+  .search-input {
+    max-width: none;
+    flex-basis: 100%;
+  }
+
+  .editor-row {
+    grid-template-columns: 1fr;
+  }
+
+  .task-main {
+    flex-wrap: wrap;
+  }
+
+  .task-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* ===== Dark theme =====
+   A modern deep-charcoal palette. Both explicit "dark" and "system" paths
+   share the same look by redefining the core design tokens on <html>. */
+
+:root[data-theme="dark"],
+:root[data-theme="system"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1115;
+  --surface: #1a1d23;
+  --surface-raised: #22262e;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text-muted: #9aa3af;
+  --accent: #6b9bff;
+  --danger: #ff6b6b;
+  --high: #ff8a80;
+  --medium: #f0b74f;
+  --low: #6bd6a0;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --focus-ring: rgba(107, 155, 255, 0.30);
+}
+
+/* System theme: mirror the dark tokens when the OS prefers dark */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="system"],
+  :root:not([data-theme]) {
+    --bg: #0f1115;
+    --surface: #1a1d23;
+    --surface-raised: #22262e;
+    --border: rgba(255, 255, 255, 0.09);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --text-muted: #9aa3af;
+    --accent: #6b9bff;
+    --danger: #ff6b6b;
+    --high: #ff8a80;
+    --medium: #f0b74f;
+    --low: #6bd6a0;
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    --focus-ring: rgba(107, 155, 255, 0.30);
+  }
+}
+
+:root[data-theme="dark"],
+:root[data-theme="system"] {
+  color: #eef1f6;
+}
+
+:root[data-theme="dark"] body,
+:root[data-theme="system"] body {
+  background-color: var(--bg);
+}
+
+/* Surface-based components use the raised surface in dark mode for depth */
+:root[data-theme="dark"] .task,
+:root[data-theme="dark"] .settings-modal,
+:root[data-theme="system"] .task,
+:root[data-theme="system"] .settings-modal {
+  background-color: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+:root[data-theme="dark"] .input,
+:root[data-theme="dark"] .btn,
+:root[data-theme="system"] .input,
+:root[data-theme="system"] .btn {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+:root[data-theme="dark"] .btn-primary,
+:root[data-theme="system"] .btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #0b1220;
+}
+
+:root[data-theme="dark"] .btn-ghost,
+:root[data-theme="system"] .btn-ghost {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .btn-danger,
+:root[data-theme="system"] .btn-danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: #2b0d0a;
+}
+
+/* Filters segmented control */
+:root[data-theme="dark"] .filters,
+:root[data-theme="system"] .filters {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+:root[data-theme="dark"] .filter-btn.active,
+:root[data-theme="system"] .filter-btn.active {
+  background-color: var(--surface-raised);
+  color: #eef1f6;
+}
+
+/* Progress bar track */
+:root[data-theme="dark"] .progress-bar,
+:root[data-theme="system"] .progress-bar {
+  background-color: rgba(255, 255, 255, 0.10);
+}
+
+/* Completed task row */
+:root[data-theme="dark"] .task.completed,
+:root[data-theme="system"] .task.completed {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Priority badges */
+:root[data-theme="dark"] .badge.priority-high,
+:root[data-theme="system"] .badge.priority-high {
+  background-color: rgba(255, 138, 128, 0.13);
+}
+
+:root[data-theme="dark"] .badge.priority-medium,
+:root[data-theme="system"] .badge.priority-medium {
+  background-color: rgba(240, 183, 79, 0.13);
+}
+
+:root[data-theme="dark"] .badge.priority-low,
+:root[data-theme="system"] .badge.priority-low {
+  background-color: rgba(107, 214, 160, 0.13);
+}
+
+/* Overdue due-date pill */
+:root[data-theme="dark"] .due.overdue,
+:root[data-theme="system"] .due.overdue {
+  background-color: rgba(255, 107, 107, 0.15);
+}
+
+/* Placeholders */
+:root[data-theme="dark"] .input::placeholder,
+:root[data-theme="system"] .input::placeholder {
+  color: #6b7480;
+}
+
+/* Focus ring uses the dark accent */
+:root[data-theme="dark"] .input:focus-visible,
+:root[data-theme="dark"] .btn:focus-visible,
+:root[data-theme="system"] .input:focus-visible,
+:root[data-theme="system"] .btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* ===== Hacker / Matrix theme ===== */
+:root[data-theme="hacker"] {
+  --bg: #0a0a0a;
+  --surface: #0d1a0d;
+  --surface-raised: #122212;
+  --border: rgba(0, 255, 65, 0.20);
+  --border-strong: rgba(0, 255, 65, 0.40);
+  --text-muted: #3fa34d;
+  --accent: #00ff41;
+  --accent-hover: #00cc33;
+  --accent-active: #009926;
+  --accent-soft: rgba(0, 255, 65, 0.15);
+  --danger: #ff3333;
+  --high: #ff5555;
+  --medium: #ffbf00;
+  --low: #00ff41;
+  --shadow: 0 0 20px rgba(0, 255, 65, 0.15);
+  --focus-ring: rgba(0, 255, 65, 0.30);
+  color: #00ff41;
+  background-color: #0a0a0a;
+  font-family: "Cascadia Code", "Fira Code", "Consolas", "Courier New", monospace;
+}
+
+:root[data-theme="hacker"] body {
+  background-color: #0a0a0a;
+}
+
+:root[data-theme="hacker"] .task,
+:root[data-theme="hacker"] .settings-modal {
+  background-color: var(--surface);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+:root[data-theme="hacker"] .input,
+:root[data-theme="hacker"] .btn {
+  background-color: var(--surface);
+  border-color: var(--border);
+  color: #00ff41;
+  font-family: inherit;
+}
+
+:root[data-theme="hacker"] .input::placeholder {
+  color: #2a6b2a;
+}
+
+:root[data-theme="hacker"] .btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #0a0a0a;
+  font-weight: 700;
+}
+
+:root[data-theme="hacker"] .btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.4);
+}
+
+:root[data-theme="hacker"] .btn-ghost {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+:root[data-theme="hacker"] .btn-danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: #0a0a0a;
+}
+
+:root[data-theme="hacker"] .filters {
+  background-color: rgba(0, 255, 65, 0.06);
+}
+
+:root[data-theme="hacker"] .filter-btn {
+  color: var(--text-muted);
+  font-family: inherit;
+}
+
+:root[data-theme="hacker"] .filter-btn.active {
+  background-color: var(--surface-raised);
+  color: #00ff41;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+}
+
+:root[data-theme="hacker"] .filter-count {
+  color: #00ff41;
+}
+
+:root[data-theme="hacker"] .progress-bar {
+  background-color: rgba(0, 255, 65, 0.10);
+}
+
+:root[data-theme="hacker"] .progress-fill {
+  background-color: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+}
+
+:root[data-theme="hacker"] .task.completed {
+  background-color: rgba(0, 255, 65, 0.03);
+}
+
+:root[data-theme="hacker"] .task.completed .task-title {
+  color: #2a6b2a;
+  text-decoration-color: #00ff41;
+}
+
+:root[data-theme="hacker"] .badge.priority-high {
+  color: #ff5555;
+  border-color: rgba(255, 85, 85, 0.4);
+  background-color: rgba(255, 85, 85, 0.10);
+}
+
+:root[data-theme="hacker"] .badge.priority-medium {
+  color: #ffbf00;
+  border-color: rgba(255, 191, 0, 0.4);
+  background-color: rgba(255, 191, 0, 0.10);
+}
+
+:root[data-theme="hacker"] .badge.priority-low {
+  color: #00ff41;
+  border-color: rgba(0, 255, 65, 0.4);
+  background-color: rgba(0, 255, 65, 0.10);
+}
+
+:root[data-theme="hacker"] .due {
+  border-color: var(--border);
+  color: #3fa34d;
+}
+
+:root[data-theme="hacker"] .due.overdue {
+  color: #ff5555;
+  border-color: rgba(255, 85, 85, 0.4);
+  background-color: rgba(255, 85, 85, 0.10);
+}
+
+:root[data-theme="hacker"] .notes-flag {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+:root[data-theme="hacker"] .segmented {
+  background-color: rgba(0, 255, 65, 0.06);
+}
+
+:root[data-theme="hacker"] .segment-btn {
+  color: var(--text-muted);
+  font-family: inherit;
+}
+
+:root[data-theme="hacker"] .segment-btn.active {
+  background-color: var(--surface-raised);
+  color: #00ff41;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+}
+
+:root[data-theme="hacker"] .settings-label {
+  color: #00ff41;
+}
+
+:root[data-theme="hacker"] .settings-header h2 {
+  color: #00ff41;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+}
+
+:root[data-theme="hacker"] .input:focus-visible,
+:root[data-theme="hacker"] .btn:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus-ring), 0 0 12px rgba(0, 255, 65, 0.3);
+}
+
+:root[data-theme="hacker"] .swatch.active {
+  border-color: var(--surface);
+  box-shadow: 0 0 0 2px var(--swatch), 0 0 10px var(--swatch);
+}
+
+:root[data-theme="hacker"] .storage-error {
+  color: #ff5555;
+}
+
+:root[data-theme="hacker"] .empty {
+  color: #2a6b2a;
+}
+
+:root[data-theme="hacker"] .app-footer {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+/* ===== Settings modal ===== */
+.settings-modal {
+  border: none;
+  border-radius: 14px;
+  padding: 0;
+  background-color: var(--surface);
+  color: inherit;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  width: min(420px, calc(100vw - 32px));
+}
+
+.settings-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.settings-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 22px;
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="dark"] .segmented,
+:root[data-theme="system"] .segmented {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.segment-btn {
+  flex: 1;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.88rem;
+  padding: 0.45em 0.5em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.segment-btn:hover {
+  color: inherit;
+}
+
+.segment-btn.active {
+  background-color: var(--surface);
+  color: inherit;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.swatches {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background-color: var(--swatch);
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.15s ease;
+}
+
+.swatch:hover {
+  transform: scale(1.1);
+}
+
+.swatch:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.swatch.active {
+  border-color: var(--surface);
+  box-shadow: 0 0 0 2px var(--swatch);
+}
+
+.settings-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 4px;
+}

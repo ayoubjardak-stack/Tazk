@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tazk</title>
+    <script type="module" src="/main.js" defer></script>
+  </head>
+
+  <body>
+    <main class="container">
+      <header class="app-header">
+        <h1>Tazk</h1>
+        <button
+          type="button"
+          id="settings-btn"
+          class="btn btn-ghost btn-small"
+          aria-label="Open settings"
+        >
+          ⚙ Settings
+        </button>
+        <p id="progress" class="progress-text">No tasks yet</p>
+        <div class="progress-bar" role="presentation">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </header>
+
+      <dialog id="settings-modal" class="settings-modal" aria-labelledby="settings-title">
+        <div class="settings-inner">
+          <header class="settings-header">
+            <h2 id="settings-title">Settings</h2>
+            <button type="button" id="settings-close" class="btn btn-ghost btn-small" aria-label="Close settings">
+              Close
+            </button>
+          </header>
+
+          <section class="settings-section">
+            <span class="settings-label">Theme</span>
+            <div class="segmented" role="group" aria-label="Theme">
+              <button type="button" class="segment-btn" data-theme="light">Light</button>
+              <button type="button" class="segment-btn" data-theme="dark">Dark</button>
+              <button type="button" class="segment-btn" data-theme="hacker">Hacker</button>
+              <button type="button" class="segment-btn" data-theme="system">System</button>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <span class="settings-label">Accent color</span>
+            <div class="swatches" role="group" aria-label="Accent color">
+              <button type="button" class="swatch" data-color="#396cd8" style="--swatch:#396cd8" aria-label="Blue"></button>
+              <button type="button" class="swatch" data-color="#237a53" style="--swatch:#237a53" aria-label="Green"></button>
+              <button type="button" class="swatch" data-color="#b4232f" style="--swatch:#b4232f" aria-label="Red"></button>
+              <button type="button" class="swatch" data-color="#9a6300" style="--swatch:#9a6300" aria-label="Amber"></button>
+              <button type="button" class="swatch" data-color="#7c4dff" style="--swatch:#7c4dff" aria-label="Purple"></button>
+              <button type="button" class="swatch" data-color="#00897b" style="--swatch:#00897b" aria-label="Teal"></button>
+            </div>
+          </section>
+
+          <section class="settings-section">
+            <span class="settings-label">Text size</span>
+            <div class="segmented" role="group" aria-label="Text size">
+              <button type="button" class="segment-btn" data-scale="compact">Compact</button>
+              <button type="button" class="segment-btn" data-scale="normal">Normal</button>
+              <button type="button" class="segment-btn" data-scale="large">Large</button>
+            </div>
+          </section>
+
+          <footer class="settings-footer">
+            <button type="button" id="settings-done" class="btn btn-primary">Done</button>
+          </footer>
+        </div>
+      </dialog>
+
+      <form id="add-form" class="add-row" autocomplete="off">
+        <input
+          id="new-title"
+          class="input title-input"
+          type="text"
+          placeholder="What needs to be done?"
+          maxlength="200"
+          aria-label="New task title"
+          required
+        />
+        <input id="new-due" class="input date-input" type="date" aria-label="Due date" />
+        <select id="new-priority" class="input select-input" aria-label="Priority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">
+            All <span id="count-all" class="filter-count">0</span>
+          </button>
+          <button type="button" class="filter-btn" data-filter="active" aria-pressed="false">
+            Active <span id="count-active" class="filter-count">0</span>
+          </button>
+          <button type="button" class="filter-btn" data-filter="completed" aria-pressed="false">
+            Done <span id="count-completed" class="filter-count">0</span>
+          </button>
+        </div>
+        <input
+          id="search"
+          class="input search-input"
+          type="search"
+          placeholder="Search tasks..."
+          aria-label="Search tasks"
+        />
+      </div>
+
+      <ul id="task-list" class="task-list" aria-live="polite"></ul>
+      <p id="empty-state" class="empty">No tasks yet. Add one above to get started.</p>
+
+      <footer class="app-footer">
+        <span id="footer-count">0 tasks</span>
+        <button type="button" id="clear-completed" class="btn btn-ghost" disabled>
+          Clear completed
+        </button>
+      </footer>
+      <p id="storage-error" class="storage-error" role="alert" hidden>
+        Changes could not be saved. Storage may be full or unavailable.
+      </p>
+    </main>
+  </body>
+</html>
