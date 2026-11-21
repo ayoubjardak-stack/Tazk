@@ -1,15 +1,5 @@
 # Tazk
 
-```sh
-cargo tauri dev
-```
-
-If the Tauri CLI is installed, that's all you need — the app loads its frontend directly from `src/`. Alternatively, build and run the Rust shell directly:
-
-```sh
-cargo run --manifest-path src-tauri/Cargo.toml
-```
- 
 A lightweight, focused desktop task manager built with [Tauri 2](https://tauri.app) and vanilla HTML, CSS and JavaScript. No bundler, no runtime dependencies on the frontend — just a clean, fast app that keeps your tasks organized and your data on your machine.
 
 ## Overview
